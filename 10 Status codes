@@ -1,0 +1,31 @@
+200 OK
+- ใช้เมื่อมี request ดึงข้อมูลแล้ว server มีข้อมูลให้ตอบกลับ
+- ใช้เมื่อมี request อัพเดตข้อมูลแล้วอัพเดตสำเร็จ
+
+201 Created
+- ใช้เมื่อมี request สร้างข้อมูลแล้ว server สร้างข้อมูลสำเร็จ
+
+204 No Content
+- ใช้เมื่อมี request ลบข้อมูลแล้ว server ลบข้อมูลสำเร็จ และฝั่ง client ไม่จำเป็นต้องทำอะไรต่อ
+
+205 Reset Content
+- ใช้เมื่อมี request ลบข้อมูลแล้ว server ลบข้อมูลสำเร็จ และฝั่ง client ต้องทำการลบข้อมูลฝั่ง client หรือ reset การแสดงผลใหม่
+
+400 Bad request
+- ใช้เมื่อมี request ที่ให้ข้อมูลเพื่อใช้ในการทำงานของฝั่ง server ไม่ครบ เช่น ต้องการ login แต่ไม่ส่งตัวแปรข้อมูล password เข้ามาใน request (ถ้าส่ง empty string ไม่ถือว่าเป็น Bad request นะครับ จะ Bad request เมื่อไม่ส่งเลย)
+
+401 Unauthorized
+- ใช้เมื่อ request นั้น ๆ ไม่มี token แนบมาด้วย หรือไม่มี session ในการเข้าสู่ระบบ (ในกรณีที่ API server ใช้ session sign-in)
+- ใช้เมื่อ request นั้นต้องการ sign-in เข้าสู่ระบบ โดยให้ username และ password แล้ว แต่ username หรือ password ไม่ถูกต้อง
+
+403 Forbidden
+- ใช้เมื่อ request นั้น ๆ มี token แนบมาด้วย หรือมี session ในการเข้าสู่ระบบ แต่ไม่มีสิทธิ์เพียงพอจะเข้าถึง API นั้น ๆ
+
+404 Not found
+- ใช้เมื่อมี request ดึงข้อมูลแล้ว server หาข้อมูลไม่พบ
+
+500 Internal server error
+- ใช้เมื่อ API มี error ที่เกิดจากการทำงานที่ผิดพลาดทางฝั่ง server เมื่อตรวจจับได้ ให้ส่ง status 500 กลับไป (อย่าลืมเก็บ error log กันด้วยนะครับ จะได้แก้ปัญหาได้ในภายหลัง)
+
+503 Service unavailable
+- ใช้เมื่อ API เข้าสู่โหมด maintenance หรือ API มีจำนวนการใช้งานสูงเกินไป ไม่สามารถให้บริการได้ชั่วคราว
